@@ -1,0 +1,80 @@
+{% assign s = section.settings %}
+
+<section class="custom-menu-section">
+  <style>
+    .custom-menu-section {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      font-family: sans-serif;
+    }
+    .menu-heading {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #2d3748;
+    }
+    .custom-menu-ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .custom-menu-ul li a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      padding: 10px 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+    .custom-menu-ul li a:hover {
+      background: #edf2f7;
+      color: #1a202c;
+      border-color: #cbd5e0;
+    }
+  </style>
+
+  {% if s.heading != blank %}
+    <h3 class="menu-heading">{{ s.heading }}</h3>
+  {% endif %}
+
+  {% if s.menu != blank %}
+    <ul class="custom-menu-ul">
+      {% for link in s.menu.links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p style="color: #718096;">Please select a menu link list in the theme editor sidebar.</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Custom Link List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select Menu / Link List"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Link List"
+    }
+  ]
+}
+{% endschema %}
