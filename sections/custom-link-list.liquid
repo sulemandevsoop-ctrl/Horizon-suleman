@@ -1,8 +1,8 @@
-<section class="custom-menu-section">
+<div class="basic-menu">
   
-  <h3>{{ section.settings.heading }}</h3>
+  <h2>{{ section.settings.heading }}</h2>
 
-  <ul class="custom-menu-ul">
+  <ul>
     {% for link in section.settings.menu.links %}
       <li>
         <a href="{{ link.url }}">{{ link.title }}</a>
@@ -10,28 +10,31 @@
     {% endfor %}
   </ul>
 
-</section>
+</div>
 
 <style>
-  .custom-menu-section {
+  .basic-menu {
     padding: 20px;
+    font-family: Arial, sans-serif;
   }
-  .custom-menu-ul {
+  .basic-menu h2 {
+    color: black;
+  }
+  .basic-menu ul {
     list-style-type: none;
     padding: 0;
   }
-  .custom-menu-ul li {
+  .basic-menu li {
     display: inline-block;
-    margin-right: 15px;
-    margin-bottom: 10px;
+    margin-right: 20px;
   }
-  .custom-menu-ul li a {
+  .basic-menu a {
     text-decoration: none;
-    color: blue;
-    font-size: 18px;
+    color: black;
+    font-size: 16px;
   }
-  .custom-menu-ul li a:hover {
-    color: red;
+  .basic-menu a:hover {
+    color: gray;
   }
 </style>
 
