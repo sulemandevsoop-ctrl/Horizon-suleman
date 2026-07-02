@@ -1,0 +1,77 @@
+<section class="featured-products-section">
+  
+  <h2>{{ section.settings.heading }}</h2>
+  
+  {% assign collection = section.settings.featured_collection %}
+  
+  <div class="product-grid"> 
+    {% for product in collection.products limit: section.settings.products_to_show %}
+      <div class="product-card">
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}">                                      
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.price | money }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+</section>
+
+<style>
+  .featured-products-section {
+    padding: 20px;
+  }
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .product-card {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  .product-card img {
+    width: 100%;
+    height: auto;
+  }
+  .product-card a {
+    text-decoration: none;
+    color: black;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Featured Products"
+    }
+  ]
+}
+{% endschema %}
