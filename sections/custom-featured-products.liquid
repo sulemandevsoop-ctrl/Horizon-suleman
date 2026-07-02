@@ -8,9 +8,9 @@
     {% for product in collection.products limit: section.settings.products_to_show %}
       <div class="product-card">
         <a href="{{ product.url }}">
-          <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}">                                      
-          <h3>{{ product.title }}</h3>
-          <p>{{ product.price | money }}</p>
+          <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">                                      
+          <h3>{{ product.title | default: "Product Title Placeholder" }}</h3>
+          <p>{{ product.price | money | default: "$19.99" }}</p>
         </a>
       </div>
     {% endfor %}
@@ -22,6 +22,8 @@
   .featured-products-section {
     padding: 20px;
     font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   .product-grid {
     display: flex;
@@ -29,10 +31,12 @@
     gap: 20px;
   }
   .product-card {
-    width: 200px;
+    flex: 1 1 calc(25% - 20px);
+    min-width: 200px;
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    box-sizing: border-box;
   }
   .product-card img {
     width: 100%;
