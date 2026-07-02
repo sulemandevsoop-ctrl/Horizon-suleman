@@ -1,42 +1,63 @@
-<div class="basic-menu">
-  
-  <h2>{{ section.settings.heading }}</h2>
+{% assign s = section.settings %}
 
-  <ul>
-    {% for link in section.settings.menu.links %}
-      <li>
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+<section class="custom-link-list-section">
+  <style>
+    .custom-link-list-section {
+      background: #f7fafc;
+      padding: 30px 40px;
+      margin: 40px auto;
+      max-width: 1200px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(130, 130, 130, 0.12);
+    }
+    .custom-link-list-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .custom-link-list-section h2 {
+      font-size: 1.5rem;
+      color: #2d3748;
+      margin: 0;
+      text-align: left;
+    }
+    .custom-link-list-section .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 30px;
+    }
+    .custom-link-list-section .menu a {
+      color: #3182ce;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .custom-link-list-section .menu a:hover {
+      color: #225ea8;
+    }
+  </style>
 
-</div>
+  <div class="custom-link-list-container">
+    {% if s.heading != blank %}
+      <h2>{{ s.heading }}</h2>
+    {% endif %}
 
-<style>
-  .basic-menu {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  .basic-menu h2 {
-    color: black;
-  }
-  .basic-menu ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  .basic-menu li {
-    display: inline-block;
-    margin-right: 20px;
-  }
-  .basic-menu a {
-    text-decoration: none;
-    color: black;
-    font-size: 16px;
-  }
-  .basic-menu a:hover {
-    color: gray;
-  }
-</style>
+    <ul class="menu">
+      {% for link in s.menu.links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
 
 {% schema %}
 {
@@ -51,7 +72,7 @@
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Select Menu / Link List"
+      "label": "Menu / Link list"
     }
   ],
   "presets": [
